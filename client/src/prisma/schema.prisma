@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  userId    String    @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String?
+  email     String    @unique
+  phone     String?   @unique
+  username  String    @unique
+  password  String
+  birthDate DateTime?
+  createdAt DateTime  @default(now())
+  avatar    String?   @default("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y")
+  banner    String?   @default("https://getwallpapers.com/wallpaper/full/2/6/6/29787.jpg")
+  bio       String?
+  isAdmin   Boolean   @default(false)
+  token     String    @unique
+  rooms     Room[]
+}
+
+model Comment {
+  commentId String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @map("userId")
+  roomId    String?  @map("roomId")
+  content   String
+  rating    Int
+  createdAt DateTime @default(now())
+  room      Room?    @relation(fields: [roomId], references: [roomId])
+}
+
+model Room {
+  roomId         String    @id @default(auto()) @map("_id") @db.ObjectId
+  city           String
+  address        String?
+  country        String
+  capacity       Int
+  occupied       Int
+  price          Int
+  accept         Int[]
+  equipments     String[]
+  features       String[]
+  hostLanguages  String[]
+  securities     String[]
+  rentFrequency  String
+  propertyType   String
+  housingType    String
+  comments       Comment[]
+  attachments    String[]
+  description    String
+  allowPhone     Boolean   @default(false)
+  allowEmail     Boolean   @default(false)
+  allowLocation  Boolean   @default(false)
+  allowMessaging Boolean   @default(true)
+  rating         Int       @default(-1)
+  createdAt      DateTime  @default(now())
+  isDeleted      Boolean   @default(false)
+  user           User      @relation(fields: [userId], references: [userId])
+  userId         String    @db.ObjectId
+}

@@ -1,0 +1,4 @@
+client/ts:3000
+server/py:5000
+files/go: 5001
+cities/js: 5002

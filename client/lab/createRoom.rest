@@ -1,0 +1,29 @@
+POST http://localhost:3000/api/rooms/
+
+{
+ "roomId": "62b598dd69ae4dbcb347f703",
+ "city": "Hauts-de-Seine",
+ "address": "Boulevard des Nations Unies, Meudon-sur-Seine",
+ "country": "US",
+ "capacity": 2,
+ "occupied": -1,
+ "price": 4,
+ "accept": [0, 100],
+ "requirements": [],
+ "equipments": [],
+ "attachments": [
+  "http://localhost:5001/uploads/1656068317462245100--41940--Dollarphotoclub_95983587.jpg",
+  "http://localhost:5001/uploads/1656068317464504400--46531--gold_medal_PNG64.png",
+  "http://localhost:5001/uploads/1656068317466724300--34589--Le-Village-olympique-JO-2016-Rio-inaugure-15-juin-2016_1_1400_933.jpg",
+  "http://localhost:5001/uploads/1656068317468427900--65594--logo-clipart-newspaper-5.png"
+ ],
+ "description": "yoooo",
+ "allowPhone": false,
+ "allowEmail": false,
+ "allowLocation": true,
+ "allowMessaging": true,
+ "rating": -1,
+ "createdAt": "2022-06-24T10:58:37.502Z",
+ "isDeleted": false,
+ "userId": "62af8005e629866722dadddd"
+}

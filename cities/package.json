@@ -1,0 +1,21 @@
+{
+  "name": ".",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Noam <noam.alrifai@protonmail.com>",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bin/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "find-nearest-cities": "^1.0.0",
+    "http-errors": "^2.0.0",
+    "pino": "^8.1.0",
+    "pino-http": "^8.0.1",
+    "pino-pretty": "^8.1.0"
+  }
+}
