@@ -23,13 +23,26 @@ cd roommate-finder
 ```
 This script will kill all processes on the port 5000, 5001, 5002
 
-3. Run the website
+3. Run the website (build version)
 ```
-npm run build
-npm start
+./build.sh
 ```
-or
+or (dev version)
 ```
-npm run dev
+./dev.sh
 ```
 And open your browser at [http://localhost:3000](http://localhost:3000)
+
+## This website is not yet hosted on the cloud
+I will put the website online in a short time
+
+## Contributors
+
+<a href="https://github.com/JigolKa/roommate-finder/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=JigolKa/roommate-finder" />
+</a>
+
+Want to contribute ? [Open a pull request](https://github.com/JigolKa/roommate-finder/pulls)
+
+## License
+MIT
