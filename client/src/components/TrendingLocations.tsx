@@ -1,10 +1,8 @@
 import { Container, createStyles } from "@mantine/core";
-import React, { useEffect } from "react";
-import { runCallback } from "../lib/callback";
 import { TrendingCountries } from "../lib/types";
 import { Location } from "./Location";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
  root: {},
  wrapper: {
   display: "flex",
@@ -41,8 +39,6 @@ interface Props {
 
 export function TrendingLocations({ countries }: Props) {
  const { classes } = useStyles();
-
- useEffect(() => console.log(countries), [countries]);
 
  if (countries && countries.length > 0) {
   return (

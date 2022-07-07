@@ -1,7 +1,5 @@
-import React from "react";
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/server";
-import { useRouter } from "next/router";
 
 export default async function handler(
  req: NextApiRequest,

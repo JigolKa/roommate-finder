@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import {
- GetServerSidePropsContext,
- GetServerSidePropsResult,
- NextPage,
-} from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 
 import Map, { Marker, NavigationControl } from "react-map-gl";
 import Pin from "../../components/Pin";
@@ -124,7 +120,7 @@ interface form {
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, ItemProps>(
- ({ value, label, ...others }: ItemProps, ref) => {
+ ({ value, label, ...others }: ItemProps) => {
   return (
    <div {...others}>
     <Group noWrap>
@@ -262,10 +258,6 @@ const Search: NextPage<Props> = (props: Props) => {
   });
  }, []);
 
- const onMarkerDragEnd = React.useCallback((event: MarkerDragEvent) => {
-  console.log({ onDragEnd: event.lngLat });
- }, []);
-
  const form = useForm({
   initialValues: {
    country:
@@ -298,19 +290,13 @@ const Search: NextPage<Props> = (props: Props) => {
 
  const rooms = JSON.parse(props.rooms) as Room[];
 
- useEffect(() => {
-  console.log(form.values);
- }, [form.values]);
-
  const updateData = () => {
   axios
    .get(
     `https://nominatim.openstreetmap.org/reverse?format=json&lat=${marker.latitude}&lon=${marker.longitude}`
    )
    .then((res) => {
-    console.log(res);
-    const { city, county, village, country_code, road, suburb, state } =
-     res.data.address;
+    const { city, county, village, country_code } = res.data.address;
 
     form.setFieldValue("city", city || county || village);
     form.setFieldValue(
@@ -324,14 +310,6 @@ const Search: NextPage<Props> = (props: Props) => {
     });
    });
  };
-
- useEffect(() => {
-  props.stuff && console.log(props.stuff);
- }, []);
-
- useEffect(() => {
-  console.log(rooms);
- }, [rooms]);
 
  return (
   <>
@@ -445,7 +423,6 @@ const Search: NextPage<Props> = (props: Props) => {
        anchor="bottom"
        draggable
        onDrag={onMarkerDrag}
-       onDragEnd={onMarkerDragEnd}
       >
        <Pin size={20} />
       </Marker>

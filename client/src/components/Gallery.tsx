@@ -53,7 +53,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function Gallery({ images, opened, setGallery }: Props) {
- const { classes, cx } = useStyles();
+ const { classes } = useStyles();
 
  return (
   <div

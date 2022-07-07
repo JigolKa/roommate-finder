@@ -225,32 +225,32 @@ export function Description({ room, user }: Props) {
     {room.features || room.equipments ? (
      <div className={classes.section} style={{ flexDirection: "column" }}>
       <h2>What this place offers</h2>
-      {room.features && room.features instanceof Array ? (
-       room.features.map((feature, index) => (
-        <div key={index} className={classes.feature}>
-         {features[feature]}
-         <span>{feature}</span>
-        </div>
-       ))
-      ) : (
-       <div className={classes.feature}>
-        {(features as any)[room.features!]}
-        <span>{room.features}</span>
-       </div>
-      )}
-      {room.equipments && room.equipments instanceof Array ? (
-       room.equipments.map((equipment, index) => (
-        <div key={index} className={classes.feature}>
-         {(equipments as any)[equipment]}
-         <span>{equipment}</span>
-        </div>
-       ))
-      ) : (
-       <div className={classes.feature}>
-        {(features as any)[room.equipments!]}
-        <span>{room.equipments}</span>
-       </div>
-      )}
+      {room.features && room.features instanceof Array
+       ? room.features.map((feature, index) => (
+          <div key={index} className={classes.feature}>
+           {features[feature]}
+           <span>{feature}</span>
+          </div>
+         ))
+       : room.features && (
+          <div className={classes.feature}>
+           {(features as any)[room.features]}
+           <span>{room.features}</span>
+          </div>
+         )}
+      {room.equipments && room.equipments instanceof Array
+       ? room.equipments.map((equipment, index) => (
+          <div key={index} className={classes.feature}>
+           {(equipments as any)[equipment]}
+           <span>{equipment}</span>
+          </div>
+         ))
+       : room.equipments && (
+          <div className={classes.feature}>
+           {(features as any)[room.equipments]}
+           <span>{room.equipments}</span>
+          </div>
+         )}
      </div>
     ) : (
      <h1>dede</h1>

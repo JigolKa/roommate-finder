@@ -11,7 +11,7 @@ import {
  TextInput,
 } from "@mantine/core";
 import Image from "next/image";
-import React, { FormEvent } from "react";
+import React from "react";
 import { useForm } from "@mantine/form";
 
 import data from "../../../data/data.json";
@@ -86,7 +86,7 @@ interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
 }
 
 const SelectItem = React.forwardRef<HTMLDivElement, ItemProps>(
- ({ value, label, ...others }: ItemProps, ref) => {
+ ({ value, label, ...others }: ItemProps) => {
   return (
    <div {...others}>
     <Group noWrap>
@@ -172,10 +172,6 @@ export default function Search() {
   });
  }, []);
 
- const onMarkerDragEnd = React.useCallback((event: MarkerDragEvent) => {
-  console.log({ onDragEnd: event.lngLat });
- }, []);
-
  const [featuresData] = React.useState<FeaturesType[]>([
   "Pool",
   "Parking lot",
@@ -249,9 +245,7 @@ export default function Search() {
     `https://nominatim.openstreetmap.org/reverse?format=json&lat=${marker.latitude}&lon=${marker.longitude}`
    )
    .then((res) => {
-    console.log(res);
-    const { city, county, village, country_code, road, suburb, state } =
-     res.data.address;
+    const { city, county, village, country_code } = res.data.address;
 
     form.setFieldValue("city", city || county || village);
     form.setFieldValue(
@@ -439,7 +433,6 @@ export default function Search() {
         anchor="bottom"
         draggable
         onDrag={onMarkerDrag}
-        onDragEnd={onMarkerDragEnd}
        >
         <Pin size={20} />
        </Marker>

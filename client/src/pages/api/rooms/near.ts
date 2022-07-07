@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { NearCity, NearestCitiesResult, Room } from "../../../lib/types";
 import prisma from "../../../prisma/server";
 
 export default async function handler(

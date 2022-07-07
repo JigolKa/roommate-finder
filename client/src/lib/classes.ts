@@ -1,5 +1,3 @@
-import { User } from "./types";
-
 export class StringClass extends String {
  str;
  constructor(str: string) {

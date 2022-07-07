@@ -6,7 +6,6 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { GridDots } from "tabler-icons-react";
 import { Room } from "../lib/types";
-import ImageGallery from "react-image-gallery";
 import { Gallery } from "./Gallery";
 
 interface Props {
@@ -135,7 +134,7 @@ export function ImageE({ room }: { room: Room }) {
   <>
    <Image
     className={classes.image}
-    src={room.attachments[currentAttachment!]}
+    src={room.attachments[currentAttachment]}
     layout="responsive"
     width={"100%"}
     height={"80%"}
@@ -159,7 +158,7 @@ export function ImageE({ room }: { room: Room }) {
      className={classes.arrowRight}
      onClick={(e) => {
       e.preventDefault();
-      setCurrentAttachment((prev) => (prev! += 1));
+      setCurrentAttachment((prev) => (prev += 1));
      }}
     />
    )}
@@ -169,26 +168,26 @@ export function ImageE({ room }: { room: Room }) {
       className={classes.arrowLeft}
       onClick={(e) => {
        e.preventDefault();
-       setCurrentAttachment((prev) => (prev! -= 1));
+       setCurrentAttachment((prev) => (prev -= 1));
       }}
      />
     )}
    {room.attachments.length > 1 &&
-    currentAttachment! >= 1 &&
+    currentAttachment >= 1 &&
     currentAttachment !== room.attachments.length - 1 && (
      <>
       <BiRightArrowAlt
        className={classes.arrowRight}
        onClick={(e) => {
         e.preventDefault();
-        setCurrentAttachment((prev) => (prev! += 1));
+        setCurrentAttachment((prev) => (prev += 1));
        }}
       />
       <BiLeftArrowAlt
        className={classes.arrowLeft}
        onClick={(e) => {
         e.preventDefault();
-        setCurrentAttachment((prev) => (prev! -= 1));
+        setCurrentAttachment((prev) => (prev -= 1));
        }}
       />
      </>
@@ -200,13 +199,6 @@ export function ImageE({ room }: { room: Room }) {
 export function ImageComponent({ room, variant }: Props) {
  const { classes } = useStyles();
  const [gallery, setGallery] = useState(false);
-
- const _ = (s: string) => {
-  return {
-   original: s,
-   thumbnail: s,
-  };
- };
 
  const images =
   room.attachments &&

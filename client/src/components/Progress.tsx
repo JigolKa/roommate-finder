@@ -3,9 +3,6 @@ import React from "react";
 
 interface TLProps {
  children: React.ReactNode;
- dashed?: boolean;
- lineWidth?: number;
- bulletSize?: number;
 }
 
 interface ItemProps {
@@ -113,8 +110,8 @@ export function Item(props: ItemProps) {
 }
 
 export function Progress(props: TLProps) {
- const { children, dashed, lineWidth = 4, bulletSize = 18 } = props;
- const { classes, cx } = useStyles();
+ const { children } = props;
+ const { classes } = useStyles();
 
  return <div className={classes.wrapper}>{children}</div>;
 }

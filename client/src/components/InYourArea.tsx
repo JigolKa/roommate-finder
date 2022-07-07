@@ -1,10 +1,10 @@
 import { Container, createStyles } from "@mantine/core";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Location } from "./Location";
 import { IpResponse, NearCity, NearestCitiesResult } from "../lib/types";
 import { getNearestCities, sortCities } from "../lib/geo.functions";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
  wrapper: {
   display: "flex",
   flexWrap: "nowrap",
@@ -49,14 +49,8 @@ export function InYourArea({ ip }: Props) {
   const longitude = ipObject ? ipObject.longitude : 2.311322;
   const latitude = ipObject ? ipObject.latitude : 48.889931;
 
-  getNearestCities(latitude, longitude, 150000).then((res) => {
-   setCities(res), console.log(res);
-  });
+  getNearestCities(latitude, longitude, 150000).then((res) => setCities(res));
  }, []);
-
- useEffect(() => {
-  console.log(cities);
- }, [cities]);
 
  return (
   <Container size={1120} mt={10}>

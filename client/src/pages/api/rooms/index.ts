@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { runMiddleware } from "../../../lib/api.middleware";
-import { Form } from "../../../lib/types";
 import prisma from "../../../prisma/server";
 
 export default async function handler(
@@ -52,17 +51,6 @@ export default async function handler(
     userId,
    } = req.body;
 
-   const requiredFields = [
-    description,
-    capacity,
-    occupied,
-    price,
-    country,
-    housingType,
-    propertyType,
-    languages,
-   ];
-
    if (
     !description ||
     !capacity ||
@@ -76,7 +64,6 @@ export default async function handler(
     res.status(400).json({
      error: "Missing required fields",
     });
-    console.log(req.body, "error");
 
     return;
    }
@@ -124,8 +111,6 @@ export default async function handler(
      },
     },
    });
-
-   console.log(req.body);
 
    res.json(room);
    return;

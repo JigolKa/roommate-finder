@@ -6,12 +6,13 @@ import bcrypt from "bcrypt";
 export async function getTrendingCountries() {
  const rooms = await prisma.room.findMany();
 
- let count: TrendingCountries[] = [];
+ const count: TrendingCountries[] = [];
 
  rooms.map((room) => {
-  const name = getCountry(room.country)!.name.common;
+  const country_ = getCountry(room.country);
+  const name = country_ ? country_.name.common : "Rest";
 
-  var element = count.find(function (e) {
+  let element = count.find(function (e) {
    return e.country === name;
   });
 
@@ -27,13 +28,11 @@ export async function getTrendingCountries() {
   }
  });
 
- console.log(count);
-
  return count;
 }
 
 export async function hash(str: string) {
- var hash: string = "";
+ let hash = "";
 
  bcrypt.genSalt(10, function (err, salt) {
   if (err) return err;

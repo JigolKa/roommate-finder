@@ -12,7 +12,6 @@ import { User } from "../lib/types";
 import Image from "next/image";
 import Link from "next/link";
 import { imageSearch } from "../lib/image_search";
-import { log } from "console";
 
 const loading = keyframes({
  from: {
@@ -162,18 +161,18 @@ export function Location({
        <Center>
         <Image
          src={
-          (author! && author!.avatar!) ||
+          (author && author.avatar) ||
           "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
          }
          height={34}
          width={34}
          alt={`${
-          (author && (author!.nickname || author!.username)) || "Anonymous"
+          (author && (author.nickname || author.username)) || "Anonymous"
          } profile picture`}
          style={{ borderRadius: "9999px" }}
         />
         <Text size="md" inline ml={10} sx={{ fontWeight: 500 }}>
-         {(author && (author!.nickname || author!.username)) || "Anonymous"}
+         {(author && (author.nickname || author.username)) || "Anonymous"}
         </Text>
        </Center>
       </Group>

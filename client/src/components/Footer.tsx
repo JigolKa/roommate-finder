@@ -5,7 +5,6 @@ import {
  Group,
  Text,
 } from "@mantine/core";
-import React from "react";
 import { BrandInstagram, BrandTwitter, BrandYoutube } from "tabler-icons-react";
 
 const useStyles = createStyles((theme) => ({

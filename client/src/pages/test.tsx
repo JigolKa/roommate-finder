@@ -1,11 +1,9 @@
-import * as React from "react";
 import { useState, useCallback } from "react";
-import { render } from "react-dom";
 import Map, { Marker, NavigationControl } from "react-map-gl";
 
 import Pin from "../components/Pin";
 
-import type { MarkerDragEvent, LngLat } from "react-map-gl";
+import type { MarkerDragEvent } from "react-map-gl";
 
 const TOKEN =
  "pk.eyJ1Ijoiamlnb2xrYSIsImEiOiJjbDRvMXJsdWcwM2UwM2tuNXJteTZteWxiIn0.RrTZPBeUmMvYxLBe5L6wvg"; // Set your mapbox token here
@@ -29,10 +27,6 @@ export default function App() {
   });
  }, []);
 
- const onMarkerDragEnd = useCallback((event: MarkerDragEvent) => {
-  console.log({ onDragEnd: event.lngLat });
- }, []);
-
  return (
   <>
    <Map
@@ -47,7 +41,6 @@ export default function App() {
      anchor="bottom"
      draggable
      onDrag={onMarkerDrag}
-     onDragEnd={onMarkerDragEnd}
     >
      <Pin size={20} />
     </Marker>

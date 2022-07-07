@@ -1,6 +1,6 @@
-import { Container, createStyles } from "@mantine/core";
+import { createStyles } from "@mantine/core";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
  wrapper: {
   display: "grid",
   gridTemplateColumns: "50% 50%",

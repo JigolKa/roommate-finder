@@ -1,21 +1,13 @@
-import { Container, createStyles } from "@mantine/core";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { Comment, Room, User } from "../lib/types";
+import { createStyles } from "@mantine/core";
+import React from "react";
+import { Room } from "../lib/types";
 import data from "../../data/isoToName.json";
 import Link from "next/link";
-import { toSlug } from "../lib/functions";
-import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import { BiRightArrowAlt, BiLeftArrowAlt } from "react-icons/bi";
-import axios from "axios";
+import { AiFillStar } from "react-icons/ai";
 import { ImageComponent } from "./ImageComponent";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
  room: Room | null;
- h?: boolean;
- city?: string;
- dead?: any;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -57,19 +49,8 @@ const useStyles = createStyles((theme) => ({
  },
 }));
 
-export function Result({ room, h, city, dead }: Props) {
+export function Result({ room }: Props) {
  const { classes, cx } = useStyles();
-
- const [_room, _setRoom] = useState<Room>();
-
- useEffect(() => {
-  if (!h) return;
-  axios
-   .get("http://localhost:3000/api/rooms/near?city=" + city)
-   .then((res) => _setRoom(res.data));
- }, []);
-
- const style = {};
 
  if (room) {
   return (
