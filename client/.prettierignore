@@ -4,3 +4,7 @@ public/
 static/
 out/
 .git/
+.next/
+.build/
+data/
+lab/

@@ -477,7 +477,7 @@ const Create: NextPage = () => {
       nothingFound="Nobody here"
       value={country}
       limit={10}
-      onChange={(value) => setCountry(value!)}
+      onChange={(value) => setCountry(value ? value : "")}
       error={countryError && "Please select a valid country"}
       required
      />
@@ -521,7 +521,7 @@ const Create: NextPage = () => {
      <NumberInput
       placeholder="How many people live in your flatshare?"
       value={living}
-      onChange={(value) => setLiving(value!)}
+      onChange={(value) => setLiving(value ? value : 0)}
       min={0}
       error={livingError && "Please enter a valid number"}
       required
@@ -536,7 +536,7 @@ const Create: NextPage = () => {
      <NumberInput
       value={hostingCapacity}
       placeholder="How many people can you host?"
-      onChange={(value) => setHostingCapacity(value!)}
+      onChange={(value) => setHostingCapacity(value ? value : 0)}
       min={1}
       error={capacityError && "Please enter a valid number"}
       required
@@ -564,10 +564,10 @@ const Create: NextPage = () => {
       placeholder="Rent price"
       defaultValue={0}
       value={price}
-      onChange={(value) => setPrice(value!)}
-      parser={(value) => value!.replace(/\$\s?|(,*)/g, "")}
+      onChange={(value) => setPrice(value ? value : 0)}
+      parser={(value) => value && value.replace(/\$\s?|(,*)/g, "")}
       formatter={(value) =>
-       !Number.isNaN(parseFloat(value!))
+       !Number.isNaN(parseFloat(value ? value : "0"))
         ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         : "$ "
       }

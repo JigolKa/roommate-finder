@@ -223,7 +223,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
    const formData = new FormData();
    formData.append("file", banner as any);
 
-   const res1 = await axios.post("http://localhost:5001/api/upload", formData, {
+   await axios.post("http://localhost:5001/api/upload", formData, {
     headers: {
      "Content-Type": "multipart/form-data",
     },
@@ -313,7 +313,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
          type="file"
          name="file"
          id="file"
-         onChange={(e) => setBanner(e.target.files![0])}
+         onChange={(e) => setBanner(e.target.files && e.target.files[0])}
          accept="image/png, image/jpg, image/gif, image/jpeg"
         />
        </label>
@@ -325,7 +325,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
          name="file"
          id="file"
          onChange={(e) => {
-          form.setFieldValue("banner", e.target.files![0]);
+          form.setFieldValue("banner", e.target.files && e.target.files[0]);
 
           setBanner((p: any) => (e.target.files ? e.target.files[0] : p));
          }}
@@ -355,7 +355,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
           name="file1"
           id="file1"
           style={{ display: "none" }}
-          onChange={(e) => setAvatar(e.target.files![0])}
+          onChange={(e) => setAvatar(e.target.files && e.target.files[0])}
           accept="image/png, image/jpg, image/gif, image/jpeg"
          />
         )}
@@ -366,7 +366,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
           id="file1"
           style={{ display: "none" }}
           onChange={(e) => {
-           form.setFieldValue("avatar", e.target.files![0]);
+           form.setFieldValue("avatar", e.target.files && e.target.files[0]);
 
            setAvatar((p: any) => (e.target.files ? e.target.files[0] : p));
           }}
