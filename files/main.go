@@ -149,6 +149,11 @@ func handler() func(http.ResponseWriter, *http.Request) {
 				io.WriteString(w, string(_json))
 			}
 		}
+
+		if (r.Method == "GET") && r.URL.Path == "/" {
+			io.WriteString(w, string([]byte("Hello World")))
+
+		}
 	}
 }
 
