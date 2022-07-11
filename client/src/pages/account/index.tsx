@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BiUpload } from "react-icons/bi";
+import config from "../../../config";
 import { getCookie } from "../../lib/cookie";
 import { isEmpty, notificationTheme } from "../../lib/functions";
 import { User } from "../../lib/types";
@@ -153,34 +154,25 @@ const Account: NextPage<Props> = ({ user }: Props) => {
 
  // eslint-disable-next-line no-console
  const handleSubmit = async (values: form) => {
-  console.log(values);
-
   if (avatar) {
-   console.log("hrehre 0");
    const formData = new FormData();
    formData.append("file", avatar as any);
 
-   const res = await axios.post("http://localhost:5001/api/upload", formData, {
+   const res = await axios.post(`${config.files}/api/upload`, formData, {
     headers: {
      "Content-Type": "multipart/form-data",
     },
    });
 
    if (banner) {
-    console.log("hrehre 1");
     const formData = new FormData();
     formData.append("file", banner as any);
 
-    const res1 = await axios.post(
-     "http://localhost:5001/api/upload",
-     formData,
-     {
-      headers: {
-       "Content-Type": "multipart/form-data",
-      },
-     }
-    );
-    console.log(res);
+    const res1 = await axios.post(`${config.files}/api/upload`, formData, {
+     headers: {
+      "Content-Type": "multipart/form-data",
+     },
+    });
     axios
      .patch("http://localhost:3000/api/users/" + _user.userId, {
       ...values,
@@ -219,11 +211,10 @@ const Account: NextPage<Props> = ({ user }: Props) => {
   }
 
   if (banner) {
-   console.log("hrehre 1");
    const formData = new FormData();
    formData.append("file", banner as any);
 
-   await axios.post("http://localhost:5001/api/upload", formData, {
+   await axios.post(`${config.files}/api/upload`, formData, {
     headers: {
      "Content-Type": "multipart/form-data",
     },
@@ -233,13 +224,12 @@ const Account: NextPage<Props> = ({ user }: Props) => {
     const formData = new FormData();
     formData.append("file", avatar as any);
 
-    const res = await axios.post("http://localhost:5001/api/upload", formData, {
+    const res = await axios.post(`${config.files}/api/upload`, formData, {
      headers: {
       "Content-Type": "multipart/form-data",
      },
     });
 
-    console.log(res);
     axios
      .patch("http://localhost:3000/api/users/" + _user.userId, {
       ...values,
@@ -260,8 +250,6 @@ const Account: NextPage<Props> = ({ user }: Props) => {
    return;
   }
 
-  console.log("hrehre -2");
-
   axios
    .patch("http://localhost:3000/api/users/" + _user.userId, values)
    .then((res) => {
@@ -278,6 +266,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
  useEffect(() => {
   if (isEmpty(_user as any)) {
    router.push("/login");
+   console.log("redirecting");
   }
  }, []);
 
@@ -301,7 +290,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
        backgroundImage: banner
         ? `url(${URL.createObjectURL(banner)})`
         : _user.banner
-        ? `url(http://localhost:5001/uploads/${replace(_user.banner)})`
+        ? `url(${config.files}/uploads/${replace(_user.banner)})`
         : `url(${form.values.banner})`,
       }}
      >
@@ -342,7 +331,7 @@ const Account: NextPage<Props> = ({ user }: Props) => {
           avatar
            ? URL.createObjectURL(avatar)
            : _user.avatar
-           ? `http://localhost:5001/uploads/${replace(_user.avatar)}`
+           ? `${config.files}/uploads/${replace(_user.avatar)}`
            : (form.values.avatar as string) ||
              "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
          }
@@ -468,14 +457,15 @@ const Account: NextPage<Props> = ({ user }: Props) => {
 export default Account;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
- const _ = getCookie(context.req, "user", 1) as User;
+ const _ = JSON.parse(context.req.cookies["user"] || "{}") as User;
 
- if (!_)
+ if (!_) {
   return {
    props: {
     user: "{}",
    },
   };
+ }
 
  const user = await prisma.user.findFirst({
   where: {

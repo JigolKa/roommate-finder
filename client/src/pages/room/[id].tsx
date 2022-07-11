@@ -12,6 +12,7 @@ import Head from "next/head";
 import { Description } from "../../components/Description";
 import { isEmpty } from "../../lib/functions";
 import Link from "next/link";
+import { AiFillEdit } from "react-icons/ai";
 
 interface Props {
  room: string;
@@ -58,6 +59,9 @@ const useStyles = createStyles(() => ({
  title: {
   marginTop: -5,
   marginBottom: 15,
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
  },
 }));
 
@@ -66,6 +70,7 @@ export default function RoomPage({ room }: Props) {
  const { classes } = useStyles();
  const [rooms, setRooms] = useState<Room[]>();
  const [user, setUser] = useState<User>();
+ const [_user, _setUser] = useState<User>();
 
  useEffect(() => {
   axios
@@ -77,6 +82,8 @@ export default function RoomPage({ room }: Props) {
   axios
    .get(`http://localhost:3000/api/user?id=${_room.userId}`)
    .then((res) => setUser(res.data));
+
+  _setUser(JSON.parse(localStorage.getItem("user") || "{}"));
  }, []);
 
  const country = (data as any)[_room.country];
@@ -93,9 +100,19 @@ export default function RoomPage({ room }: Props) {
      <div
       style={{ position: "relative", width: "100%", justifyContent: "center" }}
      >
-      <h1 className={classes.title}>
-       {_room.city}, {country}
-      </h1>
+      <div className={classes.title}>
+       <h1>
+        {_room.city}, {country}
+       </h1>
+
+       {_user && _room.userId === _user.userId && (
+        <Link href={`/account/room/${_room.roomId}`}>
+         <a>
+          <AiFillEdit size={28} />
+         </a>
+        </Link>
+       )}
+      </div>
       <ImageComponent
        room={_room}
        variant={
@@ -105,16 +122,6 @@ export default function RoomPage({ room }: Props) {
      </div>
     </div>
 
-    {_room.userId === user?.userId && (
-     <h4 className={classes.edit}>
-      Want to edit this flatshare? Click{" "}
-      <span>
-       <Link href={`/account/room/${_room.roomId}`}>
-        <a>here</a>
-       </Link>
-      </span>
-     </h4>
-    )}
     <Description room={_room} user={user} />
 
     <div style={{ marginTop: 25 }}>

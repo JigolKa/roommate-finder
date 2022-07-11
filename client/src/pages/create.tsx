@@ -38,6 +38,7 @@ import {
  RentFrequency,
  SecuritiesType,
 } from "../lib/types";
+import config from "../../config";
 
 const useStyles = createStyles((theme) => ({
  span: {
@@ -387,7 +388,7 @@ const Create: NextPage = () => {
     formData.append("file", form.attachments[i]);
    }
 
-   const res = await axios.post("http://localhost:5001/api/upload", formData, {
+   const res = await axios.post(`${config.files}/api/upload`, formData, {
     headers: {
      "Content-Type": "multipart/form-data",
     },

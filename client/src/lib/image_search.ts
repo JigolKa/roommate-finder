@@ -1,8 +1,9 @@
 import axios from "axios";
+import config from "../../config";
 
 export async function imageSearch(term: string, limit = 1) {
  const response = await axios.get(
-  `http://localhost:5000/images/${term}?limit=${limit}`
+  `${config.server}/images/${term}?limit=${limit}`
  );
 
  return response;

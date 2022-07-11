@@ -8,6 +8,7 @@ import { ImageComponent } from "./ImageComponent";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
  room: Room | null;
+ account?: boolean;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -49,12 +50,14 @@ const useStyles = createStyles((theme) => ({
  },
 }));
 
-export function Result({ room }: Props) {
+export function Result({ room, account }: Props) {
  const { classes, cx } = useStyles();
 
  if (room) {
   return (
-   <Link href={`/room/${room.roomId}`}>
+   <Link
+    href={account ? `/account/rooms/${room.roomId}` : `/room/${room.roomId}`}
+   >
     <a>
      <div className={classes.container}>
       <div style={{ position: "relative", width: "100%" }}>

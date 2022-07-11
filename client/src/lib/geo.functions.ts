@@ -1,5 +1,6 @@
 import axios from "axios";
 import countries from "world-countries";
+import config from "../../config";
 import { NearCity, NearestCitiesResult } from "./types";
 
 export function getCountry(iso2: string) {
@@ -17,7 +18,7 @@ export async function getNearestCities(
  max = 50
 ): Promise<NearestCitiesResult> {
  const response = await axios.get(
-  `http://localhost:5002/api/city?lat=${lat}&lng=${lng}&dist=${dist}&max=${max}`
+  `${config.cities}/api/city?lat=${lat}&lng=${lng}&dist=${dist}&max=${max}`
  );
 
  return response.data;

@@ -31,6 +31,22 @@ export function isEmpty<T>(arr: Array<T> | Record<string, unknown>) {
  }
 }
 
+export const toString = (a: any) => {
+ if (a instanceof Array) return a.toString();
+
+ if (a instanceof Object) return JSON.stringify(a);
+
+ if (typeof a === "number") return a.toString();
+
+ if (typeof a === "boolean") {
+  return a === true ? "true" : "false";
+ }
+
+ if (typeof a === "string") {
+  return a;
+ }
+};
+
 export function capitalize(s: string): string {
  if (typeof s !== "string") return "";
  return s.charAt(0).toUpperCase() + s.slice(1);

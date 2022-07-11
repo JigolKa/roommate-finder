@@ -13,6 +13,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { User } from "../lib/types";
+import { ImExit } from "react-icons/im";
+import { IoMdExit } from "react-icons/io";
 
 const useStyles = createStyles((theme) => ({
  inner: {
@@ -88,6 +90,15 @@ const useStyles = createStyles((theme) => ({
   borderRadius: 99999,
   objectFit: "cover",
  },
+
+ disconnect: {
+  "> svg": {
+   height: 26,
+   width: 26,
+   marginBottom: -4,
+   cursor: "pointer",
+  },
+ },
 }));
 
 interface HeaderSearchProps {
@@ -98,6 +109,7 @@ export function HeaderSearch({ links }: HeaderSearchProps) {
  const { classes } = useStyles();
  const theme = useMantineTheme();
  const router = useRouter();
+ const [logged, setLogged] = useState(false);
  const [img, setImg] = useState(
   <svg
    viewBox="0 0 32 32"
@@ -142,9 +154,15 @@ export function HeaderSearch({ links }: HeaderSearchProps) {
      className={classes.img}
     />
    );
+   setLogged(true);
    return;
   }
  }, []);
+
+ const signOut = () => {
+  localStorage.removeItem("user");
+  router.push("/");
+ };
 
  return (
   <>
@@ -168,7 +186,7 @@ export function HeaderSearch({ links }: HeaderSearchProps) {
        readOnly
       />
 
-      <Group>
+      <Group align={"center"}>
        {items}
 
        <div
@@ -181,6 +199,15 @@ export function HeaderSearch({ links }: HeaderSearchProps) {
        >
         {img}
        </div>
+       {logged && (
+        <div
+         className={classes.disconnect}
+         title="Sign out"
+         onClick={() => signOut()}
+        >
+         <IoMdExit />
+        </div>
+       )}
       </Group>
      </div>
     </Container>

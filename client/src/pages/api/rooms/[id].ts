@@ -48,5 +48,17 @@ export default async function handler(
    res.end();
    return;
   }
+
+  case "PATCH": {
+   const room = await prisma.room.update({
+    where: {
+     roomId: id as string,
+    },
+    data: req.body,
+   });
+
+   res.status(200).json(room);
+   return;
+  }
  }
 }

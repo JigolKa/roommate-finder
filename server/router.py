@@ -1,18 +1,7 @@
-import os
 import lib
-from flask import Flask, jsonify, request, flash, redirect, url_for
+from flask import Flask, jsonify, request
 import json
-from werkzeug.utils import secure_filename
 app = Flask(__name__)
-
-app.config["UPLOAD_FOLDER"] = "./uploads"
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 @app.route('/images/<term>')
 def images(term):
@@ -61,25 +50,5 @@ def get_cities(term):
     return response
 
 
-@app.route("/upload", methods=["POST"])
-def upload():
-    data = None
-    if 'file' not in request.files or file.filename == '':
-        data = {"error": "no files"}
-
-    file = request.files['file']
-
-    if file and allowed_file(file.filename):
-        data = {"cool": "coll"}
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-    response = jsonify(data)
-
-    response.headers['Access-Control-Allow-Origin'] = '*'
-
-    return "response"
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

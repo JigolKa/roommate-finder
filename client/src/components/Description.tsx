@@ -216,6 +216,7 @@ export function Description({ room, user }: Props) {
         : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
       }
       className={classes.avatar}
+      objectFit="cover"
      />
     </div>
     <div className={classes.section} style={{ flexDirection: "column" }}>

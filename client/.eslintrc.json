@@ -23,6 +23,6 @@
  "rules": {
   "no-unused-vars": ["warn"],
   "@typescript-eslint/no-explicit-any": "off",
-  "no-console": ["error"]
+  "no-console": "off"
  }
 }

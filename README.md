@@ -1,11 +1,16 @@
 # roommate-finder
 
-![License](https://img.shields.io/github/license/JigolKa/roommate-finder) 
-![Issues](https://img.shields.io/github/issues/JigolKa/roommate-finder)
-![Forks](https://img.shields.io/github/forks/JigolKa/roommate-finder) 
-![Twitter](https://img.shields.io/twitter/follow/JigolKa?label=Follow)
+[![License](https://img.shields.io/github/license/JigolKa/roommate-finder)](https://github.com/JigolKa/roommate-finder/blob/main/LICENSE)
+[![Issues](https://img.shields.io/github/issues/JigolKa/roommate-finder)](https://github.com/JigolKa/roommate-finder/issues)
+[![Twitter](https://img.shields.io/twitter/follow/JigolKa?label=Follow)](https://twitter.com/JigolKa)
 <br />
 Cool website to find flatshares around you!
+
+## Requirements
+
+- Golang >= 1.18 <br />
+- Python >= 3.9.5 <br />
+- Node >= 14.16.1
 
 ## ⚠ This website is still in developpement
 Don't hesitate to open a new issue!
